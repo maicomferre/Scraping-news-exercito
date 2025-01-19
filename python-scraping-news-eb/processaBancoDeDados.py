@@ -23,7 +23,7 @@ def create_db_if_not_exist():
             log.info('create_db_if_not_exist tentando criar tabela de banco de dados caso não exista')
 
         except PermissionError as e:
-            log.error("Erro de permissão ao acessar o arquivo template.sql " % e)
+            log.error("Erro de permissão ao acessar o arquivo template.sql [%s]" % e)
     else:
         log.error('processaBancoDeDados[create_db_if_not_exists] template.sql não existe.')
 
@@ -42,10 +42,10 @@ def mysql_connect():
             database=os.getenv("DB_DB"),
         )
     except mysql.errors.Error as e:
-        log.error('Erro ao realiza a conexão com o banco de dados.' % e)
+        log.error('Erro ao realiza a conexão com o banco de dados. [%s]' % e)
         return None
     except Exception as e:
-        log.error('Erro[mysql_connect]: ' % e)
+        log.error('Erro[mysql_connect]: [%s]' % e)
         return None
 
 
