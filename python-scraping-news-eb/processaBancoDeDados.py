@@ -41,7 +41,7 @@ def mysql_connect():
             password=os.getenv("DB_PASSWORD"),
             database=os.getenv("DB_DB"),
         )
-    except mysql.errors as e:
+    except mysql.errors.Error as e:
         log.error('Erro ao realiza a conexão com o banco de dados.' % e)
         return None
     except Exception as e:
