@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "python-scraping-news-eb"
+name = "python_scraping_news_eb"
 version = "0.1.0"
 description = ""
 authors = ["Maicom Ferreira <maicomferre3242@gmail.com>"]
 readme = "README.md"
+
 
 [tool.poetry.dependencies]
 python = "^3.12"
