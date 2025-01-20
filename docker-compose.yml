@@ -1,26 +1,14 @@
-version: "3.9"
+version: '3.8'
+
 services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
-    environment:
-      - PYTHONUNBUFFERED=1
-    depends_on:
-      - db
+      - "8090:8090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
-  db:
-    image: mysql:8.0
-    container_name: mysql_container
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: joomla5passwd
-      MYSQL_DATABASE: ect
-      MYSQL_USER: joomlauser
-      MYSQL_PASSWORD: joomla5passwd
-    ports:
-      - "3306:3306"
+    network_mode: host
