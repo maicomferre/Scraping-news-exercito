@@ -11,6 +11,7 @@ log = Log(__name__)
 dotenv.load_dotenv()
 
 def create_db_if_not_exist():
+    print("Tentando Criar banco de dados caso não exista")
     if os.path.exists('template.sql'):
         try:
             file = open('template.sql', 'r')
@@ -23,7 +24,7 @@ def create_db_if_not_exist():
             log.info('create_db_if_not_exist tentando criar tabela de banco de dados caso não exista')
 
         except PermissionError as e:
-            log.error("Erro de permissão ao acessar o arquivo template.sql [%s]" % e)
+            log.error(f"Erro de permissão ao acessar o arquivo template.sql [{e}]")
     else:
         log.error('processaBancoDeDados[create_db_if_not_exists] template.sql não existe.')
 
@@ -40,12 +41,13 @@ def mysql_connect():
             user=os.getenv("DB_USER"),
             password=os.getenv("DB_PASSWORD"),
             database=os.getenv("DB_DB"),
+            connection_timeout=10,
         )
     except mysql.errors.Error as e:
-        log.error('Erro ao realiza a conexão com o banco de dados. [%s]' % e)
+        log.error(f"Erro ao realiza a conexão com o banco de dados. [{e}]")
         return None
     except Exception as e:
-        log.error('Erro[mysql_connect]: [%s]' % e)
+        log.error("Erro[mysql_connect]: [{e}]")
         return None
 
 

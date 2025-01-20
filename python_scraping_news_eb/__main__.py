@@ -40,7 +40,8 @@ def main() -> None:
                     else:
                         log.warning('retorno de obter_noticias(): None. Tentando novamente')
                     time.sleep(60)
-
+            else:
+                log.info("Fora do horário de captura.")
         time.sleep(3600)
 
 if __name__ == '__main__':

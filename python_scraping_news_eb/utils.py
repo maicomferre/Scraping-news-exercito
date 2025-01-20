@@ -1,35 +1,51 @@
 import logging
 import os
 
-
 class Log:
+    name = None
     def __init__(self, name):
+        self.name = name
         os.makedirs('log', exist_ok=True)
 
-        logging.basicConfig(
-            format="{asctime} - {levelname} - {message}",
-            filemode='a+',
-            filename='log/service.log',
+        self.logger = logging.getLogger(name)
+        self.logger.setLevel(logging.DEBUG)
+
+        # Criar manipulador de arquivo
+        file_handler = logging.FileHandler('log/service.log', mode='a+')
+        file_handler.setLevel(logging.DEBUG)
+
+        # Configurar formato do log
+        formatter = logging.Formatter(
+            fmt="{asctime} - {levelname} - {message}",
             style="{",
-            datefmt="%Y-%m-%d %H:%M",
-            level=logging.NOTSET,
+            datefmt="%Y-%m-%d %H:%M"
         )
-        logging.debug(f"Log de {name=}")
+        file_handler.setFormatter(formatter)
+
+        # Evitar múltiplos manipuladores duplicados
+        if not self.logger.handlers:
+            self.logger.addHandler(file_handler)
 
     def warning(self, msg):
-        logging.warning(msg)
+        print(f"warning[{self.name}]: {msg}")
+        self.logger.warning(msg)
 
     def error(self, msg):
-        logging.error(msg)
+        print(f"error[{self.name}]: {msg}")
+        self.logger.error(msg)
 
     def critical(self, msg):
-        logging.critical(msg)
+        print(f"critical[{self.name}]: {msg}")
+        self.logger.critical(msg)
 
     def info(self, msg):
-        logging.info(msg)
+        print(f"info[{self.name}]: {msg}")
+        self.logger.info(msg)
 
     def debug(self, msg):
-        logging.debug(msg)
+        print(f"debug[{self.name}]: {msg}")
+        self.logger.debug(msg)
 
     def exception(self, msg):
-        logging.exception(msg)
+        print(f"exception[{self.name}]: {msg}")
+        self.logger.exception(msg)
