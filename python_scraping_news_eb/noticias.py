@@ -1,6 +1,10 @@
 from bs4 import BeautifulSoup
-from processaBancoDeDados import Database
+from BancoDeDados import Database
+from Imagens import Image
 import datetime
+from utils import Log
+
+log = Log(__name__)
 
 SCAPING_ROOT_DIV = 'noticiario'
 SCRAPING_LI_DIV = 'list-group-item'
@@ -47,8 +51,13 @@ def processar_noticias(noticias) -> None:
 
         date = date.strftime("%Y-%m-%d %H:%M:%S")
 
+        img_name = None
+        try:
+            img_name = Image(image_url).obter_imagem()
+        except Exception as e:
+            log.error("[noticias] Não foi possivel obter a imagem da noticia" + str(e))
 
-        if db.update_news(title, category, link, text, date):
+        if db.update_news(title, category, link, text, date,image_url,img_name):
             print("[processarNoticias]: \tNoticia adicionada com sucesso.")
 
         print('--------------------')

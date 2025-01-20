@@ -57,7 +57,7 @@ class Database:
     def __init__(self):
         self.myl = mysql_connect()
 
-    def update_news(self,title, category, link, text, date) -> bool:
+    def update_news(self,title, category, link, text, date,image_url,img_name) -> bool:
         if self.myl is None or self.myl.is_connected() is False:
             self.myl = mysql_connect()
 
@@ -73,8 +73,8 @@ class Database:
             return False
 
         #image_url -> ainda falta adicionar
-        cursor.execute("INSERT INTO {table}(title,category,url,description,publish_date) VALUES (%s,%s,%s,%s,%s)".format(table=os.getenv('TABLE')),
-                            (title,category,link,text,date)
+        cursor.execute("INSERT INTO {table}(title,category,url,description,publish_date,image_url,local_image) VALUES (%s,%s,%s,%s,%s)".format(table=os.getenv('TABLE')),
+                            (title,category,link,text,date,image_url,img_name)
                        )
         self.myl.commit()
 

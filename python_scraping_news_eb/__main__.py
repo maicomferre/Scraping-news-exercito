@@ -5,8 +5,8 @@
 """
 
 from obterNoticias import obter_noticias
-from processarNoticias import processar_noticias
-from processaBancoDeDados import create_db_if_not_exist
+from noticias import processar_noticias
+from BancoDeDados import create_db_if_not_exist
 from utils import Log
 import time
 import datetime
@@ -16,7 +16,7 @@ log = Log(__name__)
 def main() -> None:
     """
         Responsável por executar o scraping.
-        Faz as requisições todos os dias de segunda à sexta
+        Faz as requisições todos os dias de segunda a sexta
         Das 8 às 18
 
     :return: None
