@@ -28,3 +28,15 @@ DB_PASSWORD = <database password>
 ````
 
 
+
+
+### Solução de Problemas
+
+-2003: Can't connect to MySQL server on 'host.docker.internal:3306' (-2 Name or service not known)
+```bash
+docker run --rm -it --add-host=host.docker.internal:host-gateway python-scraping-news-eb:latest bash
+```
+2003: Can't connect to MySQL server on 'host.docker.internal:3306' (timed out)]
+```bash
+sudo ufw allow mysql
+```
