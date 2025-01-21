@@ -2,8 +2,6 @@ import mysql.connector as mysql
 import dotenv
 import os
 
-from poetry.console.commands import self
-
 from utils import Log
 
 log = Log(__name__)
@@ -53,7 +51,7 @@ def mysql_connect():
 
 
 class Database:
-    self.myl = None
+    myl = None
     def __init__(self):
         self.myl = mysql_connect()
 
@@ -73,7 +71,7 @@ class Database:
             return False
 
         #image_url -> ainda falta adicionar
-        cursor.execute("INSERT INTO {table}(title,category,url,description,publish_date,image_url,local_image) VALUES (%s,%s,%s,%s,%s)".format(table=os.getenv('TABLE')),
+        cursor.execute("INSERT INTO {table}(title,category,url,description,publish_date,image_url,local_image) VALUES (%s,%s,%s,%s,%s,%s,%s)".format(table=os.getenv('TABLE')),
                             (title,category,link,text,date,image_url,img_name)
                        )
         self.myl.commit()
