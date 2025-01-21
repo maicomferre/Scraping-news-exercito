@@ -26,9 +26,9 @@ def main() -> None:
 
     while True:
         now = datetime.datetime.now()
-        if now.weekday() < 6 or True: #Segunda->Sexta
+        if now.weekday() < 6: #Segunda->Sexta
             log.info('Não é final de semana.')
-            if 7 < now.hour < 19 or True:
+            if 7 < now.hour < 19:
                 log.info('Iniciando captura das noticias.')
                 news = None
                 while news is None:
