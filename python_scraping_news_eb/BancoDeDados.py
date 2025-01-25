@@ -35,17 +35,18 @@ def mysql_connect():
 
         return mysql.connect(
             host=os.getenv("DB_HOST"),
-            port=os.getenv("DB_PORT"),
+            port=os.getenv("DB_PORT",3306),
             user=os.getenv("DB_USER"),
             password=os.getenv("DB_PASSWORD"),
             database=os.getenv("DB_DB"),
+            auth_plugin="caching_sha2_password",
             connection_timeout=10,
         )
-    except mysql.errors.Error as e:
+    except mysql.Error as e:
         log.error(f"Erro ao realiza a conexão com o banco de dados. [{e}]")
         return None
     except Exception as e:
-        log.error("Erro[mysql_connect]: [{e}]")
+        log.error(f"Erro[mysql_connect]: [{e}]")
         return None
 
 

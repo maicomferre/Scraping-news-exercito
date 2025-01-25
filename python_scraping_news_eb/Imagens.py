@@ -15,7 +15,7 @@ class Image:
     broken = False
     def __init__(self, url):
             if len(url) == 0:
-                log.error("URL vazia. Não foi possível baixa a imagem")
+                log.error("URL vazia. Não foi possível baixar a imagem")
                 self.broken = True
                 return
 
